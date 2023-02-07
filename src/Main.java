@@ -168,7 +168,7 @@ public class Main {
                 .toString()
                 .replace("Season ", "");
             filesInDir.forEach(file -> {
-                if (file.getName().matches(".*S" + seasonNum + ".*")) {
+                if (file.getName().matches(".*[Ss]" + seasonNum + ".*")) {
                     episodesMappedToSeasons
                         .get(seasonPath)
                         .add(Paths.get(file.getPath()));
