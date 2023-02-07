@@ -2,7 +2,7 @@
 
 Small program that organizes downloaded episodes from a series into a 
 better maintainable structure.
-***
+
 ## Output
 <p>
 A series with <font color="#a52a2a">n</font> seasons and <font color="#a52a2a">n</font> episodes each 
