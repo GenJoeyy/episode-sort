@@ -8,19 +8,26 @@ import java.util.*;
 import java.util.stream.Stream;
 
 /**
- * Main class that implements a program to help manage a TV series.
- *<p>
- * The program asks for the name of the series, the seasons the user has
- * downloaded, the path to the folder where the episodes are located, and
- * renames the episode files accordingly.
+ * Main class for a program to manage TV series downloads.
+ * <p>
+ * This program allows a user to input the name of a TV series and the seasons
+ * that have been downloaded. The program then allows the user to specify the
+ * path to the folder where all the episodes of the TV series are stored. The
+ * program will then validate the path and print out the percentage of episodes
+ * that have been downloaded for each season.
  *
  * @author GenJoeyy
  */
 public class Main {
 
-    /** Scanner object to read input from the user */
+    /**
+     * A constant scanner instance used to get user input.
+     */
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Clears the console screen based on the operating system in use.
+     */
     private static void cls() {
         try {
             if (
@@ -34,6 +41,11 @@ public class Main {
         }
     }
 
+    /**
+     * Gets the name of the TV series from the user input.
+     *
+     * @return the name of the TV series.
+     */
     private static String getSeriesNameFromInput() {
         while (true) {
             System.out.println("What is the series named?");
@@ -47,6 +59,11 @@ public class Main {
         }
     }
 
+    /**
+     * Gets the list of seasons that have been downloaded from the user input.
+     *
+     * @return the list of seasons that have been downloaded.
+     */
     private static List<Integer> getSeasonsFromInput() {
         List<Integer> res = new ArrayList<>();
         while (true) {
@@ -88,6 +105,12 @@ public class Main {
         }
     }
 
+    /**
+     * Validates the specified path string.
+     *
+     * @param path the path string to be validated.
+     * @return true if the path is valid, false otherwise.
+     */
     private static boolean isValidPath(String path) {
         try {
             Paths.get(path);
@@ -97,6 +120,14 @@ public class Main {
         return true;
     }
 
+    /**
+     * Gets the path to the folder where all the episodes of the TV series are
+     * stored from the user input.
+     *
+     * @param seriesName the name of the TV series.
+     * @return the path to the folder where all the episodes of the TV series
+     *         are stored.
+     */
     private static Path getPathFromInput(String seriesName) {
         String examplePath = "Users/Your Name/" + seriesName;
 
@@ -129,6 +160,13 @@ public class Main {
         }
     }
 
+    /**
+     * Prints out the percentage of episodes that have been downloaded for each
+     * season.
+     *
+     * @param percentage the percentage of episodes that have been downloaded.
+     * @param barLength the length of the progress bar to be printed.
+     */
     public static void printProgress(double percentage, int barLength) {
         if (barLength < 1) {
             System.out.printf("\r%.2f%%", percentage * 100);
@@ -143,6 +181,11 @@ public class Main {
         );
     }
 
+    /**
+     * Entry point of the program.
+     *
+     * @param args command line arguments.
+     */
     public static void main(String[] args) {
         String seriesName = getSeriesNameFromInput();
         List<Integer> seriesSeasons = getSeasonsFromInput();
