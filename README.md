@@ -9,7 +9,7 @@ A series with <code>n</code> seasons and <code>n</code> episodes each will be
 rearranged into the following structure:
 </p>
 
-``` 
+```
 Series/
 ├── Season 01/
 │   ├── Series s01e01.mkv
