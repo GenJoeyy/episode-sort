@@ -5,28 +5,27 @@ better maintainable structure.
 
 ## Output
 <p>
-A series with <font color="#a52a2a">n</font> seasons and <font color="#a52a2a">n</font> episodes each 
-will be 
+A series with <code>n</code> seasons and <code>n</code> episodes each will be 
 rearranged into the following structure:
 </p>
 
-
-Series/  
-├─ Season 01/  
-│  ├─ Series s01e01.mkv  
-│  ├─ Series s01e02.mkv  
-│  ├─ ...  
-│  ├─ Series s01e<font color="#a52a2a">n</font>.mkv  
-├─ Season 02/  
-│  ├─ Series s02e01.mkv  
-│  ├─ ...  
-├─ Season 03/  
-├─ ...  
-├─ Season <font color="#a52a2a">n</font>/  
-│  ├─ Series Name s<font color="#a52a2a">n</font>e01.mkv  
-│  ├─ ...  
-│  ├─ Series Name s<font color="#a52a2a">n</font>e<font color="#a52a2a">n</font>.mkv
-
+```
+Series/
+├── Season 01/
+│   ├── Series s01e01.mkv
+│   ├── Series s01e02.mkv
+│   ├── ...
+│   └── Series s01e(n).mkv
+├── Season 02/
+│   ├── Series s02e01.mkv
+│   └── ...
+├── Season 03/
+├── ...
+└── Season (n)/
+    ├── Series s(n)e01.mkv
+    ├── ...
+    └── Series s(n)e(n).mkv
+```
 
 
 
