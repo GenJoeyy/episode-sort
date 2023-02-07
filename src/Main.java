@@ -7,15 +7,30 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
+/**
+ * Main class that implements a program to help manage a TV series.
+ *<p>
+ * The program asks for the name of the series, the seasons the user has
+ * downloaded, the path to the folder where the episodes are located, and
+ * renames the episode files accordingly.
+ *
+ * @author GenJoeyy
+ */
 public class Main {
 
+    /** Scanner object to read input from the user */
     private static final Scanner scanner = new Scanner(System.in);
 
     private static void cls() {
         try {
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        } catch (Exception ignored) {
-            System.out.println("\n".repeat(200));
+            if (
+                System.getProperty("os.name").contains("Windows")
+            ) new ProcessBuilder("cmd", "/c", "cls")
+                .inheritIO()
+                .start()
+                .waitFor(); else Runtime.getRuntime().exec("clear");
+        } catch (IOException | InterruptedException ex) {
+            System.out.println(System.lineSeparator().repeat(150));
         }
     }
 
