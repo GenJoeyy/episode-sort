@@ -36,7 +36,9 @@ For the program to work properly, there are some requirements that need to be me
 (so `e01, e02, ..., e(n)` is allowed while `e01, e03` or `e32` isn't)
 - all episodes must:
   - be in *.mkv* format
-  - have `S|s<season-number>` somewhere in their name
   - be ordered by episode numbers
+  - have `S|s<season-number>` somewhere in their name   
+   (except if there's only 1 
+    season)
 
 

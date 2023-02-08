@@ -35,7 +35,7 @@ public class Main {
             ) new ProcessBuilder("cmd", "/c", "cls")
                 .inheritIO()
                 .start()
-                .waitFor(); else Runtime.getRuntime().exec("clear");
+                .waitFor(); else Runtime.getRuntime().exec(new String[] { "clear" });
         } catch (IOException | InterruptedException ex) {
             System.out.println(System.lineSeparator().repeat(150));
         }
@@ -234,44 +234,75 @@ public class Main {
             });
         });
 
+        // If there's only one Seasons and no files have been added to any Seasons
+        // directory, add all files to Season 01
+        if (
+            seasonPaths.size() == 1 &&
+            episodesMappedToSeasons.get(seasonPaths.get(0)).size() == 0
+        ) {
+            filesInDir.forEach(file -> {
+                if (!file.getName().equals("Season 01")) {
+                    episodesMappedToSeasons
+                        .get(seasonPaths.get(0))
+                        .add(Paths.get(file.getPath()));
+                }
+            });
+        }
+
         episodesMappedToSeasons.forEach((seasonPath, episodes) -> {
-            String seasonNum = seasonPath
-                .getFileName()
-                .toString()
-                .replace("Season ", "");
             System.out.println(seasonPath.getFileName() + ":");
             for (int i = 0; i < episodes.size(); i++) {
                 Path file = episodes.get(i);
                 String filename = file.getFileName().toString();
-                if (filename.matches(".*[Ss]" + seasonNum + ".*")) {
-                    Path newPathForEpisode = Paths.get(
-                        seasonPath.toString(),
-                        filename
-                    );
-                    try {
-                        Files.move(file, newPathForEpisode);
-                        episodes.set(i, newPathForEpisode);
-                    } catch (IOException e) {
-                        System.out.println();
-                        throw new RuntimeException(e);
-                    }
-                    printProgress((double) (i + 1) / episodes.size(), 40);
+                Path newPathForEpisode = Paths.get(seasonPath.toString(), filename);
+                try {
+                    Files.move(file, newPathForEpisode);
+                    episodes.set(i, newPathForEpisode);
+                } catch (IOException e) {
+                    System.out.println();
+                    throw new RuntimeException(e);
                 }
+                printProgress((double) (i + 1) / episodes.size(), 40);
             }
             System.out.println();
         });
-        System.out.println("\nPress ENTER to continue");
+
+        System.out.println("\nPress ENTER to continue and rename all files");
         scanner.nextLine();
         cls();
 
         episodesMappedToSeasons.forEach((seasonPath, episodes) -> {
             List<File> mkvFiles = new ArrayList<>();
-            episodes.forEach(episode ->
-                Arrays
-                    .stream(Objects.requireNonNull(episode.toFile().listFiles()))
-                    .filter(file -> file.getName().matches(".*\\.mkv"))
-                    .forEach(mkvFiles::add)
-            );
+            episodes.forEach(episode -> {
+                try (Stream<Path> files = Files.walk(episode)) {
+                    List<Path> filteredFiles = files
+                        .filter(file -> {
+                            String name = file
+                                .getFileName()
+                                .toString()
+                                .toLowerCase();
+                            return (
+                                name.matches(".*\\.mkv") &&
+                                !(
+                                    name.contains("sample") ||
+                                    name.contains("trailer")
+                                )
+                            );
+                        })
+                        .toList();
+                    if (filteredFiles.size() > 1) {
+                        throw new RuntimeException(
+                            "Found more than one .mkv file in '" +
+                            episode +
+                            "'\nMake sure to delete all trailers/samples"
+                        );
+                    } else {
+                        filteredFiles.forEach(file -> mkvFiles.add(file.toFile()));
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             mkvFiles.forEach(file -> {
                 try {
                     Files.move(
