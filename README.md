@@ -1,30 +1,30 @@
 # Episode Sort
 
-Small program that organizes downloaded episodes from a series into a 
+Small program that organizes downloaded episodes from a show into a 
 better maintainable structure.
 
 ## Output
 <p>
-A series with <code>n</code> seasons and <code>n</code> episodes each will be 
+A show with <code>n</code> seasons and <code>n</code> episodes each will be 
 rearranged into the following structure:
 </p>
 
 ```
-Series/
+Showname/
 ├── Season 01/
-│   ├── Series s01e01.mkv
-│   ├── Series s01e02.mkv
+│   ├── Showname s01e01.mkv
+│   ├── Showname s01e02.mkv
 │   ├── ...
-│   └── Series s01e(n).mkv
+│   └── Showname s01e(n).mkv
 ├── Season 02/
-│   ├── Series s02e01.mkv
+│   ├── Showname s02e01.mkv
 │   └── ...
 ├── Season 03/
 ├── ...
 └── Season (n)/
-    ├── Series s(n)e01.mkv
+    ├── Showname s(n)e01.mkv
     ├── ...
-    └── Series s(n)e(n).mkv
+    └── Showname s(n)e(n).mkv
 ```
 
 
