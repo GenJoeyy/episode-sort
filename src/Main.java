@@ -8,11 +8,11 @@ import java.util.*;
 import java.util.stream.Stream;
 
 /**
- * Main class for a program to manage TV series downloads.
+ * Main class for a program to manage TV Show downloads.
  * <p>
- * This program allows a user to input the name of a TV series and the seasons
+ * This program allows a user to input the name of a TV Show and the seasons
  * that have been downloaded. The program then allows the user to specify the
- * path to the folder where all the episodes of the TV series are stored. The
+ * path to the folder where all the episodes of the TV Show are stored. The
  * program will then validate the path and print out the percentage of episodes
  * that have been downloaded for each season.
  *
@@ -42,9 +42,9 @@ public class Main {
     }
 
     /**
-     * Gets the name of the TV series from the user input.
+     * Gets the name of the TV Show from the user input.
      *
-     * @return the name of the TV series.
+     * @return the name of the TV Show.
      */
     private static String getSeriesNameFromInput() {
         while (true) {
@@ -121,11 +121,11 @@ public class Main {
     }
 
     /**
-     * Gets the path to the folder where all the episodes of the TV series are
+     * Gets the path to the folder where all the episodes of the TV Show are
      * stored from the user input.
      *
-     * @param seriesName the name of the TV series.
-     * @return the path to the folder where all the episodes of the TV series
+     * @param seriesName the name of the TV Show.
+     * @return the path to the folder where all the episodes of the TV Show
      *         are stored.
      */
     private static Path getPathFromInput(String seriesName) {
